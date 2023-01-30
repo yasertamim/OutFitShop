@@ -67,10 +67,10 @@ the user can pay throuw credit cards or PayPal.
 ## Project requirments:
 - Software:
           - IDE Visual Studio 2022
-          - programing language C# 
+          - programing language C#.
           ###(backend)
           - Database Sql Server
-          ###- Front end Html, Css
+          ###Front end Html, Css
               - Frameworks:
                   - Frontend: Bootstrap
                   - Backend: asp.net core 6 mvc
