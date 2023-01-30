@@ -57,7 +57,8 @@ the user can pay throuw credit cards or PayPal.
 - Log in
 - Home (landing page)
 - Home (Products)
-- Details (Product)
+- Details (Product) for user
+- Details (Product) for admin
 - Payment 
 - ShopingCurve (Orders)
 - Add product
