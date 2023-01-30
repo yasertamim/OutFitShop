@@ -77,4 +77,4 @@ the user can pay throuw credit cards or PayPal.
                   - Backend: asp.net core 6 mvc
                   
 ## Entity Relationships Diagram
-![image description](OutFitShop/ERD.png)
+![My animated logo](ERD.png)
