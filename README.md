@@ -75,3 +75,6 @@ the user can pay throuw credit cards or PayPal.
               - Frameworks:
                   - Frontend: Bootstrap
                   - Backend: asp.net core 6 mvc
+                  
+## Entity Relationships Diagram
+![Screenshot](Database ER diagram.png)
