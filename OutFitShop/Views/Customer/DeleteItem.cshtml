@@ -1,0 +1,95 @@
+﻿@model OrderLine
+
+@using OutFitShop.Data
+
+
+@using OutFitShop.Data
+@inject ApplicationDbContext _db;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Context = _db;
+}
+
+ @if(Model.Product == null){
+
+     
+        var p = _db.Products.FirstOrDefault(p => p.Id.Equals(@Model.ProductId));
+    <main class="row-cols-2">
+
+
+        <div class="left-column">
+
+            <img data-image="red" class="active" src="@p.Image" alt="" style="width:200px; height:200px;">
+        </div>
+
+        <div class="right-column">
+
+            <div class="product-description">
+
+                <h1>@p.Title</h1>
+                <p>@p.Details</p>
+            </div>
+            <div class="product-price">
+                <span>@p.Price KR</span>
+                @*<a href=" @Url.Action("Cart", "Customer", new { Id = @Model.Id })" class="cart-btn">Add to cart</a>*@
+
+
+
+
+            </div>
+            <div class="row">
+                <p>Amount</p>
+                <p>1</p>
+            </div>
+
+            <div>
+                <form asp-action="DeleteItem" method="post">
+                    <input type="hidden" asp-route-id="@Model.Id" />
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                </form>
+            </div>
+
+          
+    </main>
+
+}else{
+    <main>
+
+        <div class="left-column">
+
+            <img data-image="red" class="active" src="@Model.Product.Image" alt="" style="width:200px; height:200px;">
+        </div>
+
+        <div class="right-column">
+
+            <div class="product-description">
+
+                <h1>@Model.Product.Title</h1>
+                <p>@Model.Product.Details</p>
+            </div>
+            <div class="product-price">
+                <span>@Model.Product.Price KR</span>
+                @*<a href=" @Url.Action("Cart", "Customer", new { Id = @Model.Id })" class="cart-btn">Add to cart</a>*@
+
+
+
+
+            </div>
+            <div class="row">
+                <p>Amount</p>
+                <p>1</p>
+            </div>
+
+            <div>
+                <form asp-action="DeleteItem" method="post">
+                    <input type="hidden" asp-route-id="@Model.Id" />
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                </form>
+            </div>
+
+    </main>
+
+
+}
+

@@ -1,1 +1,79 @@
-﻿@model IEnumerable<Order>
+﻿@model Order
+
+@using OutFitShop.Data
+
+@inject ApplicationDbContext _db;
+@{
+    Layout = "_Layout";
+    ViewBag.Context = _db;
+}
+
+
+
+@foreach (var line in @Model.OrderLines)
+{
+
+    <div class="control-section card-control-section">
+        <div class="e-card-resize-container">
+            <div>
+
+                @if (line.Product == null)
+                {
+                    var p = _db.Products.FirstOrDefault(p => p.Id.Equals(line.ProductId));
+                    <div class="row card-layout">
+                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6" style="width:400px;">
+
+                            <div tabindex="0" class="e-card" style="border-color:aquamarine; border:solid; border-block-width:2px;">
+                                <img class="img-responsive" src="@p.Image" style="width: 100px; height:100px;" />
+                                <div class="e-card-content">
+                                    <div class="label_amount">Price</div>
+                                    <div class="price">@p.Price kr </div>
+                                    <div class="label_amount">Amount </div>
+
+
+                                    <div class="amount">@line.Amount </div>
+
+                                    <div class="e-card-actions">
+                                        <a asp-area="" asp-controller="Customer" asp-action="DeleteItem" asp-route-id="@line.Id" class="btn btn-outline-danger">Delete</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row card-layout">
+                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6" style="width:400px;">
+
+                            <div tabindex="0" class="e-card" style="border-color:aquamarine; border:solid; border-block-width:2px;">
+                                <img class="img-responsive" src="@line.Product.Image" style="width: 100px; height:100px;" />
+                                <div class="e-card-content">
+                                    <div class="label_amount">Price</div>
+                                    <div class="price">@line.Product.Price kr </div>
+                                    <div class="label_amount">Amount </div>
+
+
+                                    <div class="amount">@line.Amount </div>
+
+                                    <div class="e-card-actions">
+                                        <a asp-area="" asp-controller="Customer" asp-action="DeleteItem" asp-route-id="@line.Id" class="btn btn-outline-danger">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+}
+<br/>
+<div class="label_amount">Total</div>
+<div class="price">@Model.Total kr </div>

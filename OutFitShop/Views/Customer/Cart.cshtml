@@ -6,6 +6,7 @@
 @{
     Layout = "_Layout";
     ViewBag.Context = _db;
+    ViewBag.Model = Model;
 }
 
 
@@ -34,7 +35,8 @@
                                     <div class="amount">@line.Amount </div>
 
                                     <div class="e-card-actions">
-                                        <button class="btn btn-outline-danger">Delete</button>
+                                        <a asp-area="" asp-controller="Customer" asp-action="DeleteItem" asp-route-id="@line.Id" class="btn btn-outline-danger">Delete</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +57,7 @@
                                     <div class="amount">@line.Amount </div>
 
                                     <div class="e-card-actions">
-                                        <button class="btn btn-outline-danger">Delete</button>
+                                        <a asp-area="" asp-controller="Customer" asp-action="DeleteItem" asp-route-id="@line.Id" class="btn btn-outline-danger">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,14 +73,19 @@
         </div>
 
    }
-        
-    
-
-   
-	
 
 
 
 
 
-<a asp-area="" asp-controller="Customer" asp-action="MyOrders"  class="cart-btn">Place order</a>
+
+
+
+@*@for(int i=0; i< Model.ToList().Count; i++){
+    <form asp-action="MyOrders" method="post">
+        <input type="hidden" asp-route-id="@Model.ToList()[i].Id" />
+        <button type="submit" class="cart-btn">Delete</button>
+    </form>
+}*@
+
+<a asp-area="" asp-controller="Customer" asp-action="MyOrders" asp-route-id="@ViewBag.Model"  class="cart-btn">Place order</a>

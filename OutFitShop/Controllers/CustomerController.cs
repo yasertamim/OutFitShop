@@ -93,35 +93,71 @@ namespace OutFitShop.Controllers
             return View(product);
         }
 
-  
 
-     //   [Authorize]
-     //   [HttpPost]
-     ////   [ActionName("Details")]
-     //   public async Task<IActionResult> DetailsPost( int id = 1)
-     //   {
-           
-         
-         
 
-     //           var prod = await _db.Products.FirstOrDefaultAsync(p => p.Id.Equals(1));
-     //           var orderLine = new OrderLine(5);
+        //   [Authorize]
+        //   [HttpPost]
+        ////   [ActionName("Details")]
+        //   public async Task<IActionResult> DetailsPost( int id = 1)
+        //   {
 
-     //           var order = await _db.Orders.FirstOrDefaultAsync(p => p.Id.Equals(1));
 
-     //           orderLine.Product = prod;
-     //           orderLine.ProductId = prod.Id;
-     //           orderLine.Order = order;
-     //           orderLine.OrderId = order.Id;
 
-     //           _db.Add(orderLine);
-     //           await _db.SaveChangesAsync();
 
-     //           return RedirectToAction("Index", new { id = prod.Categ });
-          
-           
-     //   }
-  
+        //           var prod = await _db.Products.FirstOrDefaultAsync(p => p.Id.Equals(1));
+        //           var orderLine = new OrderLine(5);
+
+        //           var order = await _db.Orders.FirstOrDefaultAsync(p => p.Id.Equals(1));
+
+        //           orderLine.Product = prod;
+        //           orderLine.ProductId = prod.Id;
+        //           orderLine.Order = order;
+        //           orderLine.OrderId = order.Id;
+
+        //           _db.Add(orderLine);
+        //           await _db.SaveChangesAsync();
+
+        //           return RedirectToAction("Index", new { id = prod.Categ });
+
+
+        //   }
+
+
+
+
+        [HttpGet]
+        [Authorize]
+        //get the view to delete the selected post
+        public async Task<IActionResult> DeleteItem(int? id)
+        {
+            var orderLine = await _db.OrderLines
+                  .FirstOrDefaultAsync(m => m.Id == id);
+
+
+            return View(orderLine);
+        }
+
+        [HttpPost]
+        [Authorize]
+        // delete the selected post
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            if (id == null || _db.OrderLines == null)
+            {
+                return NotFound();
+            }
+
+            var orderLine = await _db.OrderLines
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (orderLine == null)
+            {
+                return NotFound();
+            }
+            _db.OrderLines.Remove(orderLine);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Cart");
+        }
+
 
 
         [Authorize]
@@ -173,12 +209,48 @@ namespace OutFitShop.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> MyOrders(int Id)
+        public async Task<IActionResult> MyOrders()
 
         {
+            
+
+            var find = await _db.Orders.FirstOrDefaultAsync(p => p.Id.Equals(order.Id));
+            if (find != null)
+            {
+                return View( find);
+            }
+
+            return View(new Order());
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> MyOrders(List<OrderLine> orderLines)
+
+        {
+            orderLines = ViewBag.Model;
+            var user = await _userManager.GetUserAsync(User);
+            if(orderLines != null)
+            {
+                var order = new Order(DateTime.Now);
+                order.User = user;
+
+                order.OrderLines.AddRange(orderLines);
+
+                _db.Orders.Add(order);
+                await _db.SaveChangesAsync();
+
+                return View(order);
 
 
-            return View(new List<Order>());
+            }
+            
+
+
+            
+
+
+            return View(new Order());
         }
 
 
