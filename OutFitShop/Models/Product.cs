@@ -4,13 +4,14 @@
     {
         public Product() { }
 
-        public Product(string title, Category.Categ categ, string details, decimal price)
+        public Product(string title, Category.Categ categ, string details, decimal price, string image)
         {
            
             Title = title;
             Categ = categ;
             Details = details;
             Price = price;
+            Image = image;
         }
 
         public int Id { get; set; }
@@ -21,7 +22,12 @@
 
         public decimal Price { get; set; }
 
-        public List<OrderLine> OrderLine { get; set; } = new List<OrderLine>();
+        public string Image { get; set; } = string.Empty;
+
+       public OrderLine? OrderLine { get; set; }
+
+
+      //  public List<OrderLine> OrderLine { get; set; } = new List<OrderLine>();
 
 
 

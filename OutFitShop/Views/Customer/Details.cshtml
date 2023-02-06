@@ -1,5 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+@model Product
+
+
+
+    <main class="row-cols-2">
+        <div class="left-column">
+
+            <img data-image="red" class="active" src="@Model.Image" alt="" style="width:200px; height:200px;">
+        </div>
+
+        <div class="right-column">
+
+            <div class="product-description">
+
+                <h1>@Model.Title</h1>
+                <p>@Model.Details</p>
+            </div>
+            <div class="product-price">
+                <span>@Model.Price KR</span>
+                @*<a href=" @Url.Action("Cart", "Customer", new { Id = @Model.Id })" class="cart-btn">Add to cart</a>*@
+
+
+                
+              
+            </div>
+            <div class="row"> 
+                <p>Amount</p>
+                <p>1</p>
+            </div>
+
+        <div><a asp-area="" asp-controller="Customer" asp-action="Cart" asp-route-id="@Model.Id" class="cart-btn">Add to cart</a></div>
+
+    </main>
+
+
+
+

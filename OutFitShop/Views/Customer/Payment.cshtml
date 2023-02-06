@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Order
+
+
+
+<div class="wrapper">
+    <div class="checkout container">
+        <form id="payment-form" method="post" asp-controller="Checkout" asp-action="Create">
+            @Html.HiddenFor(n => n.Id)
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" name="Title" asp-for="">Title</h5>
+                    <p class="card-text">Description</p>
+                    <p class="card-text"><small class="text-muted">Author: Author</small></p>
+                    <p class="card-text"><small class="text-muted">Price: Price</small></p>
+                </div>
+                <img style="width: 40%" class="card-img-bottom" src="/media/shirt.jpg" alt="Card image cap">
+            </div>
+            <hr />
+            <button class="btn btn-success" type="submit"><span>Confirm payment - $Price</span></button>
+            <section>
+                <div class="bt-drop-in-wrapper">
+                    <div id="bt-dropin"></div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>

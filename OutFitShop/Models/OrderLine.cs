@@ -1,13 +1,14 @@
-﻿namespace OutFitShop.Models
+﻿using Microsoft.Build.Framework;
+
+namespace OutFitShop.Models
 {
     public class OrderLine
     {
-
         public OrderLine() { }
 
-        public OrderLine( int amount)
+        public OrderLine(int amount)
         {
-           
+
             Amount = amount;
         }
 
@@ -16,11 +17,11 @@
         public int Amount { get; set; }
 
         public Order? Order { get; set; }
-        public int OrderId { get; set; }
-
-        public int ProductId { get; set; }
-        public Product? Product { get; set; }
-
+        public int? OrderId { get; set; }
+       
+        public int? ProductId { get; set; }
+       // [Required]
+        public Product Product { get; set; }
 
     }
 }

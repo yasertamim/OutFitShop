@@ -1,5 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+
+@model IEnumerable<Product>
+
+
+
+<h2 style="position:absolute; margin-inline-start:600px; font-family:'Times New Roman', Times, serif"> @Model.ElementAt(0).Categ.ToString().ToUpper()</h2>
+
+<br/>
+<br/>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="card" style="width: 18rem;">
+
+            <div class="card-img">
+
+
+                <img id="theimage" class="card-img-top" src="@product.Image">
+            
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@product.Title </h5>
+
+                <div>
+                    <p class="price">@product.Price kr</p>
+                    <a asp-area="" asp-controller="Customer" asp-action="Details" asp-route-id="@product.Id" class="btn btn-secondary">Show details</a>
+                </div>
+            </div>
+
+           
+           
+            </div>
+        
+
+
+    }
+   
+
+</div>
